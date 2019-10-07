@@ -1,0 +1,76 @@
+﻿@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #ECF0F1;
+    /*background: url("../images/background.png") no-repeat center fixed;
+    background-size: cover;*/
+}
+
+/*********** LOGIN *********/
+.login {
+    background: #2a3f54;
+    color: #ecf0f1;
+}
+
+.hr {
+    background: #1abb9c;
+    height:2px;
+}
+
+.btn-color {
+    color: #ecf0f1;
+    background: #2a3f54;
+    border-color: #1abb9c;
+}
+
+    .btn-color:hover {
+        color: #ecf0f1;
+        background: #1abb9c;
+        border-color: #1abb9c;
+    }
+
+.footer-text-color {
+    color:#2a3f54;
+    font-weight:bold;
+}
+
+/*********** Siderbar Menu *********/
+.container-right {
+}
+
+.siderbar-left {
+    background: #2a3f54;
+}
+
+.siderbar-left ul li {
+    padding: 15px;
+}
+
+    .siderbar-left ul li:hover a{
+        color: #2a3f54;
+        background: #ECF0F1;
+    }
+        .siderbar-left ul li:hover{
+            color: #2a3f54;
+            background: #ECF0F1;
+        }
+    .siderbar-left ul ul li {
+        margin-left: 15px;
+    }
+
+    .siderbar-left ul li a {
+        padding: inherit;
+        text-decoration: none;
+        color: #ECF0F1;
+    }
+
+    /** Container content*/
+.container-content {
+}
+.user-icon-size {
+    font-size:100px;
+}
+
+.image-container {
+    color: aliceblue;
+}

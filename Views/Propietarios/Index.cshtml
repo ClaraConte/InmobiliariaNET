@@ -1,0 +1,68 @@
+﻿@{
+    @model IEnumerable<Inmobiliaria.Models.Usuario>
+
+    ViewData["Title"] = "Propietarios";
+}
+<div class="row">
+    <div class="col-12 pl-4 pt-4 container-content">
+
+        <h2>Propietarios</h2>
+        <p>
+            <a asp-action="Create">Crear nuevo <span class="lnr lnr-file-add"></span></a>
+        </p>
+        <div class="row">
+            <div class="col-11">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdUsuario)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UsuarioNombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UsuarioApellido)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UsuarioDni)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UsuarioTelefono)
+                            </th>
+                            <th>
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioNombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioApellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioDni)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioTelefono)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdUsuario" title="Editar"><span class="lnr lnr-pencil"></span></a>&nbsp;
+                                    <a asp-action="Eliminar" asp-route-id="@item.IdUsuario" title="Eliminar"><span class="lnr lnr-cross"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

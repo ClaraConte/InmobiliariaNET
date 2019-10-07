@@ -1,0 +1,35 @@
+﻿
+@model Inmobiliaria.Models.Login
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row mt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 p-5 login">
+        <h1>Login <span class="lnr lnr-users"></span></h1>
+        <hr class="hr" />
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Usuario" class="control-label"></label>
+                <input asp-for="Usuario" class="form-control" />
+                <span asp-validation-for="Usuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clave" class="control-label"></label>
+                <input asp-for="Clave" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Iniciar Sesión" class="btn btn-primary btn-color" />
+            </div>
+        </form>
+    </div>
+    </div>
+
+<div>
+</div>
+
+
