@@ -12,8 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Inmobiliaria.Controllers
 {
+
     public class HomeController : Controller
     {
+
         private readonly IRepositorioUsuario usuario;
         private readonly DataContext contexto;
 
@@ -22,7 +24,8 @@ namespace Inmobiliaria.Controllers
             this.usuario = usuario;
             this.contexto = contexto;
         }
-        [Authorize]
+
+        [Authorize(Policy = "Administrador")]
         public IActionResult Index()
         {
             return View();
@@ -54,16 +57,16 @@ namespace Inmobiliaria.Controllers
                     return View();
                 }
 
-                String clameName;
-                if (p.IdUsuarioTipo.IdUsuarioTipo == 1) { clameName = "Administrador"; }
-                else if (p.IdUsuarioTipo.IdUsuarioTipo == 3) { clameName = "Propietario"; }
-                else { clameName = "Inquilino"; }
+                String claimName;
+                if (p.IdUsuarioTipo.IdUsuarioTipo == 1) { claimName = "Administrador"; }
+                else if (p.IdUsuarioTipo.IdUsuarioTipo == 3) { claimName = "Propietario"; }
+                else { claimName = "Inquilino"; }
 
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, p.UsuarioEmail),
                     new Claim("FullName", p.UsuarioNombre + " " + p.UsuarioApellido),
-                    new Claim(ClaimTypes.Role, clameName),
+                    new Claim(ClaimTypes.Role, claimName),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
@@ -78,6 +81,10 @@ namespace Inmobiliaria.Controllers
                     CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity),
                     authProperties);
+
+                if (claimName == "Propietario") { 
+                     return RedirectToAction("AdminPropietarioIndex");
+                }
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -92,8 +99,24 @@ namespace Inmobiliaria.Controllers
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme);
+            CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Restringido()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            return View(claims);
+        }
+
+        [Authorize(Policy = "Propietario")]
+        public ActionResult AdminPropietarioIndex()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            return View();
+        }
     }
+
 }

@@ -32,3 +32,4 @@ C:\Users\Clara Conte\source\repos\Inmobiliaria\obj\Debug\netcoreapp2.2\Razor\Vie
 C:\Users\Clara Conte\source\repos\Inmobiliaria\obj\Debug\netcoreapp2.2\Razor\Views\Propietarios\Index.g.cshtml.cs
 C:\Users\Clara Conte\source\repos\Inmobiliaria\obj\Debug\netcoreapp2.2\Razor\Views\Propietarios\Edit.g.cshtml.cs
 C:\Users\Clara Conte\source\repos\Inmobiliaria\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\Clara Conte\source\repos\Inmobiliaria\obj\Debug\netcoreapp2.2\Razor\Views\Home\AdminPropietarioIndex.g.cshtml.cs

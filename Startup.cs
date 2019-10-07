@@ -37,9 +37,11 @@ namespace Inmobiliaria
                 options.AccessDeniedPath = "/Home/Restringido";
             });
 
+            //Autorizacion
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Administrador", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador"));
+                options.AddPolicy("Propietario", policy => policy.RequireClaim(ClaimTypes.Role, "Propietario"));
             });
 
             services.AddMvc();

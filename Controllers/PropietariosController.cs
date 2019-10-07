@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Inmobiliaria.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace Inmobiliaria.Controllers
 {
+    [Authorize(Policy = "Administrador")]
+
     public class PropietariosController : Controller
     {
 
@@ -22,7 +26,6 @@ namespace Inmobiliaria.Controllers
             this.config = config;
         }
 
-        [Authorize]
         // GET: Propietario
         public ActionResult Index()
         {
@@ -31,7 +34,6 @@ namespace Inmobiliaria.Controllers
             return View(lista);
         }
 
-        [Authorize]
         // GET: Propietario/Edit/5
         public ActionResult Edit(int id)
         {
