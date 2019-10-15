@@ -2,9 +2,10 @@
 
 namespace Inmobiliaria.Models
 {
-    public interface IRepositorioUsuario : IRepositorioUsuario<Usuario>
+    public interface IRepositorioUsuario : IRepositorio<Usuario>
     {
         Usuario GetByEmail(string email);
         IList<Usuario> GetByType(int idUsuarioTipo);
+        IList<Usuario> GetByCriterio(BusquedaView busqueda);
     }
 }

@@ -14,7 +14,7 @@ namespace Inmobiliaria.Models
         public int IdUsuario { get; set; }
 
         [Display(Name = "Nombre")]
-        [Required]
+        [Required ]
         public string UsuarioNombre { get; set; }
 
         [Display(Name = "Apellido")]
@@ -32,14 +32,19 @@ namespace Inmobiliaria.Models
         [Display(Name = "Email")]
         [Required, EmailAddress]
         public string UsuarioEmail { get; set; }
-        [Required, DataType(DataType.Password)]
-        public string UsuarioClave { get; set; }
-        [Required]
-        public string UsuarioSalt { get; set; }
-        [Required]
 
-        [Display(Name = "Código")] public string UsuarioDomicilio { get; set; }
+        [DataType(DataType.Password)]
+        public string UsuarioClave { get; set; }
+
+        public string UsuarioSalt { get; set; }
+    
+        [Display(Name = "Domicilio")]
         [Required]
-        public UsuarioTipo IdUsuarioTipo { get; set; }
+        public string UsuarioDomicilio { get; set; }
+
+        public int IdUsuarioTipo { get; set; }
+        [Display(Name = "Tipo")]
+        [ForeignKey("IdUsuarioTipo")]
+        public UsuarioTipo Tipo { get; set; }
     }
 }

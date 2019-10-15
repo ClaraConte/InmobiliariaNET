@@ -74,3 +74,22 @@ body {
 .image-container {
     color: aliceblue;
 }
+.menssage-validate {
+    color:brown;
+}
+.estado-enable {
+    color:#1abb9c;
+    font-weight:bold;
+}
+.estado-disable {
+    color: #f34e00b0;
+    font-weight: bold;
+}
+.icon-action {
+    color: #17a2b8;
+}
+
+.icon-action-cart {
+    color: #17a2b8;
+    font-size:18px;
+}

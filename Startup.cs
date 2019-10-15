@@ -17,7 +17,6 @@ namespace Inmobiliaria
     public class Startup
     {
         private readonly IConfiguration configuration;
-
         public Startup(IConfiguration configuration)
         {
             this.configuration = configuration;
@@ -40,13 +39,27 @@ namespace Inmobiliaria
             //Autorizacion
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Administrador", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador"));
-                options.AddPolicy("Propietario", policy => policy.RequireClaim(ClaimTypes.Role, "Propietario"));
+                options.AddPolicy("Administrador", policy => policy.RequireClaim(ClaimTypes.Role, "administrador"));
+                options.AddPolicy("Propietario", policy => policy.RequireClaim(ClaimTypes.Role, "propietario"));
             });
 
             services.AddMvc();
-            services.AddTransient<IRepositorioUsuario<Usuario>, RepositorioUsuario>();
+            services.AddTransient<IRepositorio<Usuario>, RepositorioUsuario>();
             services.AddTransient<IRepositorioUsuario, RepositorioUsuario>();
+
+            services.AddTransient<IRepositorio<UsuarioTipo>, RepositorioUsuarioTipo>();
+
+            services.AddTransient<IRepositorio<Inmueble>, RepositorioInmueble>();
+            services.AddTransient<IRepositorioInmueble, RepositorioInmueble>();
+
+            services.AddTransient<IRepositorio<InmuebleTipo>, RepositorioInmuebleTipo>();
+            services.AddTransient<IRepositorio<InmuebleUso>, RepositorioInmuebleUso>();
+
+            services.AddTransient<IRepositorio<Contrato>, RepositorioContrato>();
+            services.AddTransient<IRepositorioContrato, RepositorioContrato>();
+
+            services.AddTransient<IRepositorio<ContratoGarantia>, RepositorioContratoGarantia>();
+
             services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
         }
 
@@ -84,7 +97,7 @@ namespace Inmobiliaria
 
                 routes.MapRoute(
                   name: "default",
-                  template: "{controller=Propietarios}/{action=Index}/{id?}");
+                  template: "{controller=Usuarios}/{action=Index}/{id?}");
             });
         }
     }

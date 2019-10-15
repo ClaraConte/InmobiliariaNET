@@ -13,5 +13,7 @@ namespace Inmobiliaria.Models
 
         }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Inmueble> Inmueble { get; set; }
+        public DbSet<Contrato> Contrato { get; set; }
     }
 }

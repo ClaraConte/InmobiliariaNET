@@ -1,0 +1,87 @@
+﻿
+@{
+    @model Inmobiliaria.Models.Inmueble
+    ViewData["Title"] = "Create";
+}
+<h4>Agregar un inmueble</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Seleccione propietario</label>
+                <select class="form-control" name="IdUsuario">
+                    @foreach (var item in (IList<Usuario>)ViewBag.Usuario)
+                    {
+                        <option value="@item.IdUsuario">@(item.UsuarioNombre)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Tipo de inmueble</label>
+                <select class="form-control" name="IdInmuebleTipo">
+                    @foreach (var item in (IList<InmuebleTipo>)ViewBag.InmuebleTipo)
+                    {
+                        <option value="@item.IdInmuebleTipo">@(item.InmuebleTipoNombre)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Uso del inmueble</label>
+                <select class="form-control" name="IdInmuebleUso">
+                    @foreach (var item in (IList<InmuebleUso>)ViewBag.InmuebleUso)
+                    {
+                        <option value="@item.IdInmuebleUso">@(item.InmuebleUsoNombre)</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="InmuebleDomicilio" class="control-label"></label>
+                <input asp-for="InmuebleDomicilio" class="form-control" />
+                <span asp-validation-for="InmuebleDomicilio" class="text-danger">
+                </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InmuebleLatitud" class="control-label"></label>
+                <input asp-for="InmuebleLatitud" class="form-control" />
+                <span asp-validation-for="InmuebleLatitud" class="text-danger">
+                </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InmuebleLongitud" class="control-label"></label>
+                <input asp-for="InmuebleLongitud" class="form-control" />
+                <span asp-validation-for="InmuebleLongitud" class="text-danger">
+                </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InmueblePrecio" class="control-label"></label>
+                <input asp-for="InmueblePrecio" class="form-control" />
+                <span asp-validation-for="InmueblePrecio" class="text-danger">
+                </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InmuebleAmbientes" class="control-label"></label>
+                <input asp-for="InmuebleAmbientes" class="form-control" />
+                <span asp-validation-for="InmuebleAmbientes" class="text-danger">
+                </span>
+            </div>
+      
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-info" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,137 @@
+﻿@{
+    @model IEnumerable<Inmobiliaria.Models.Contrato>
+    ViewData["Title"] = "Contrato";
+}
+<div class="row">
+    <div class="col-12 pl-4 pt-4 container-content">
+        <div class="row">
+            <div class="col-7 mt-4">
+                <form class="form-inline" asp-action="Index">
+                    <span>Buscar por:</span>
+
+                    <div class="form-group mx-sm-3">
+                        
+                        <select class="mdb-select md-form colorful-select dropdown-primary" name="Tipo">
+                            <option value="1">Inquilino DNI</option>
+                            <option value="2">Propietario DNI</option>
+                            <option value="3">Inmueble código</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="form-control" name="Criterio" value="@ViewBag.Busqueda" id="TextSearch" placeholder="Criterio de búsqueda ... ">
+                    </div>
+                    <button type="submit" class="btn btn-info">Buscar</button>
+                </form>
+            </div>
+            <div class="col-5 mt-4">
+            <form class="form-inline" asp-action="Index">
+
+                <div class="form-group mx-sm-3">
+
+                </div>
+                <div class="form-group mx-sm-3">
+                    <input type="date" class="form-control" name="Criterio" value="@ViewBag.Busqueda" id="TextSearch" placeholder="Seleccione fecha ... ">
+                </div>
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </form>
+        </div>
+        </div>
+
+        <form asp-action="Index">
+            <div class="row">
+                <div class="col-11 mt-4">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdContrato)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContratoDetalle)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContratoFechaInicio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContratoFechaFin)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContratoPrecio)
+                                </th>
+                                <th>
+                                   Inquilino
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Inmueble.InmuebleDomicilio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContratoEstado)
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdContrato)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ContratoDetalle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ContratoFechaInicio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ContratoFechaFin)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ContratoPrecio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario.UsuarioNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Inmueble.InmuebleDomicilio)
+                                    </td>
+                                   
+                                    <td>
+                                        @if ((item.ContratoEstado) == 1)
+                                        {
+                                            <span class="estado-enable"><i class="fas fa-check-circle" title="Viegente"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="estado-disable"><i class="fas fa-times-circle" title="Terminado"></i></span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="Renovar" asp-route-id="@item.IdContrato" class="icon-action"><i class="fas fa-pencil-alt" title="Renovar"></i></a>&nbsp;&nbsp;
+                                        <a asp-action="Rescindir" asp-route-id="@item.IdContrato" class="estado-disable"><i class="fas fa-trash-alt" title="Rescindir"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            @if (ViewBag.Values == 0)
+                            {
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="alert alert-danger">
+                                            No se encontraron resultados para su búsqueda
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

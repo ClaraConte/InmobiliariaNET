@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Inmobiliaria.Models
 {
-    public interface IRepositorioUsuario<T>
+    public interface IRepositorio<T>
     { 
-        int Add(T p);
-        int Delete(T p);
+        int Create(T p);
+        int Delete(int id);
         int Update(T p);
-        List<T> GetAll();
+        IList<T> GetAll();
         T GetAllById(int id);
     }
 }

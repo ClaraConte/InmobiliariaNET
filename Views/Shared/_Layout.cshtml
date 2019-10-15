@@ -48,8 +48,8 @@
                 </environment>
             }
         <div>
-            @if (User.IsInRole("Administrador"))
-            {
+            @if (User.IsInRole("administrador"))
+            { 
                 <section>
                     <div class="row">
                         <div class="col-2 siderbar-left">
@@ -75,11 +75,11 @@
                                             <li class="active">
                                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                                     <i class="fas fa-user-tie"></i>
-                                                    Propietarios
+                                                    Usuarios
                                                 </a>
                                                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                                                    <li><a asp-controller="Propietarios" asp-action="Index">Listar</a></li>
-                                                    <li><a asp-controller="Propietarios" asp-action="Create">Agregar</a></li>
+                                                    <li><a asp-controller="Usuarios" asp-action="Index">Listar</a></li>
+                                                    <li><a asp-controller="Usuarios" asp-action="Create">Agregar</a></li>
                                                 </ul>
                                             </li>
                                             <li>
@@ -88,18 +88,18 @@
                                                     Inquilinos
                                                 </a>
                                                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                                                    <li><a asp-controller="Inquilinos" asp-action="Index">Listar</a></li>
-                                                    <li><a asp-controller="Inquilinos" asp-action="Create">Agregar</a></li>
+                                                    <li><a asp-controller="Usuarios" asp-action="Index">Listar</a></li>
+                                                    <li><a asp-controller="Usuarios" asp-action="Create">Agregar</a></li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#propiedadesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                                <a href="#inmueblesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                                     <i class="fas fa-building"></i>
-                                                    Propiedades
+                                                    Inmuebles
                                                 </a>
-                                                <ul class="collapse list-unstyled" id="propiedadesSubmenu">
-                                                    <li><a asp-controller="Propiedades" asp-action="Index">Listar</a></li>
-                                                    <li><a asp-controller="Propiedades" asp-action="Create">Agregar</a></li>
+                                                <ul class="collapse list-unstyled" id="inmueblesSubmenu">
+                                                    <li><a asp-controller="Inmuebles" asp-action="Index">Listar</a></li>
+                                                    <li><a asp-controller="Inmuebles" asp-action="Create">Agregar</a></li>
                                                 </ul>
                                             </li>
                                             <li>
@@ -109,13 +109,13 @@
                                                 </a>
                                                 <ul class="collapse list-unstyled" id="contratosSubmenu">
                                                     <li><a asp-controller="Contratos" asp-action="Index">Listar</a></li>
-                                                    <li><a asp-controller="Contratos" asp-action="Create">Agregar</a></li>
+                                                    <li><a asp-controller="Contratos" asp-action="CreateIndex">Alquilar</a></li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a asp-controller="Contratos" asp-action="CreateIndex">
                                                     <i class="fas fa-archive"></i>
-                                                    Alquileres
+                                                    Alquilar
                                                 </a>
                                             </li>
                                             <li>
@@ -127,12 +127,6 @@
                                                     <li><a asp-controller="Pagos" asp-action="Index">Listar</a></li>
                                                     <li><a asp-controller="Pagos" asp-action="Create">Agregar</a></li>
                                                 </ul>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fas fa-chalkboard"></i>
-                                                    Consultas
-                                                </a>
                                             </li>
                                         </ul>
                                         <hr />
@@ -184,7 +178,7 @@
                     </div>
                 </section>
             }
-            else if (User.IsInRole("Propietario"))
+            else if (User.IsInRole("propietario"))
             {
                 <section>
                     <div class="row">
@@ -214,7 +208,7 @@
                                                     Mi cuenta
                                                 </a>
                                                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                                                    <li><a asp-controller="Propietarios" asp-action="Index">Editar</a></li>
+                                                    <li><a asp-controller="Usuarios" asp-action="Index">Editar</a></li>
                                                 </ul>
                                             </li>
                                             <li>
@@ -227,13 +221,13 @@
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#propiedadesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                                <a href="#inmueblesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                                     <i class="fas fa-building"></i>
-                                                    Propiedades
+                                                    Inmuebles
                                                 </a>
-                                                <ul class="collapse list-unstyled" id="propiedadesSubmenu">
-                                                    <li><a asp-controller="Propiedades" asp-action="Index">Listar</a></li>
-                                                    <li><a asp-controller="Propiedades" asp-action="Create">Agregar</a></li>
+                                                <ul class="collapse list-unstyled" id="inmueblesSubmenu">
+                                                    <li><a asp-controller="Inmuebles" asp-action="Index">Listar</a></li>
+                                                    <li><a asp-controller="Inmuebles" asp-action="Create">Agregar</a></li>
                                                 </ul>
                                             </li>
                                             <li>

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Inmobiliaria.Controllers
 {
-
     public class HomeController : Controller
     {
 
@@ -50,22 +49,22 @@ namespace Inmobiliaria.Controllers
                     prf: KeyDerivationPrf.HMACSHA1,
                     iterationCount: 1000,
                     numBytesRequested: 256 / 8));
-                var p = usuario.GetByEmail(loginView.Usuario);
-                if (p == null || p.UsuarioClave != hashed)
+                var user = usuario.GetByEmail(loginView.Usuario);
+                if (user == null || user.UsuarioClave != hashed)
                 {
                     ViewBag.Mensaje = "Datos inválidos";
                     return View();
                 }
 
                 String claimName;
-                if (p.IdUsuarioTipo.IdUsuarioTipo == 1) { claimName = "Administrador"; }
-                else if (p.IdUsuarioTipo.IdUsuarioTipo == 3) { claimName = "Propietario"; }
-                else { claimName = "Inquilino"; }
+                if (user.Tipo.IdUsuarioTipo == 1) { claimName = user.Tipo.UsuarioTipoRol; }
+                else if (user.Tipo.IdUsuarioTipo == 3) { claimName = user.Tipo.UsuarioTipoRol; }
+                else { claimName = user.Tipo.UsuarioTipoRol; }
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, p.UsuarioEmail),
-                    new Claim("FullName", p.UsuarioNombre + " " + p.UsuarioApellido),
+                    new Claim(ClaimTypes.Name, user.UsuarioEmail),
+                    new Claim("FullName", user.UsuarioNombre + " " + user.UsuarioApellido),
                     new Claim(ClaimTypes.Role, claimName),
                 };
 
@@ -82,7 +81,7 @@ namespace Inmobiliaria.Controllers
                     new ClaimsPrincipal(claimsIdentity),
                     authProperties);
 
-                if (claimName == "Propietario") { 
+                if (claimName == "propietario") { 
                      return RedirectToAction("AdminPropietarioIndex");
                 }
                 return RedirectToAction("Index");

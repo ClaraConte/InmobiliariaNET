@@ -1,0 +1,109 @@
+﻿@{
+    @model IEnumerable<Inmobiliaria.Models.Usuario>
+
+    ViewData["Title"] = "Usuarios";
+}
+<div class="row">
+    <div class="col-12 pl-4 pt-4 container-content">
+
+        <h2>Usuarios</h2>
+        <p>
+            <a asp-action="Create" class="icon-action">Crear nuevo <i class="fas fa-plus-square"  title="Agregar Usuario"></i></a>
+        </p>
+        <div class="row">
+            <div class="col-11 mt-4">
+                <form class="form-inline" asp-action="Index">
+                    <span>Seleccione: </span>
+
+                    <div class="form-group mx-sm-3">
+                        <select class="mdb-select md-form colorful-select dropdown-primary" name="Tipo">
+                            <option value="1">Tipo</option>
+                            <option value="2">Nombre</option>
+                            <option value="3">DNI</option>
+                            <option value="4">Email</option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="form-control" name="Criterio" value="@ViewBag.Busqueda" id="TextSearch" placeholder="buscar .. ">
+                    </div>
+                    <button type="submit" class="btn btn-info">Buscar</button>
+                </form>
+            </div>
+        </div>
+        
+        <form asp-action="Index">
+            <div class="row">
+                <div class="col-11 mt-4">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdUsuario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UsuarioNombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UsuarioApellido)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UsuarioDni)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UsuarioTelefono)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Tipo)
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdUsuario)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UsuarioNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UsuarioApellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UsuarioDni)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UsuarioTelefono)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Tipo.UsuarioTipoRol)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.IdUsuario"  class="icon-action"><i class="fas fa-pencil-alt" title="Editar"></i></a>&nbsp;&nbsp;
+                                        <a asp-action="Delete" asp-route-id="@item.IdUsuario"  class="estado-disable"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            @if (ViewBag.Values == 0)
+                            {
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="alert alert-danger">
+                                            No se encontraron resultados para su búsqueda
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

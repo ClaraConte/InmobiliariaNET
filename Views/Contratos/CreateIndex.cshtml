@@ -1,0 +1,129 @@
+﻿@{
+    @model IEnumerable<Inmobiliaria.Models.Inmueble>
+    ViewData["Title"] = "Crear contrato";
+}
+<div class="row">
+    <div class="col-12 pl-4 pt-4 container-content">
+
+        <h2>Inmuebles disponibles</h2>
+
+        <div class="row">
+            <div class="col-11 mt-4">
+                <form class="form-inline" asp-action="Create">
+                    <span>Buscar por: </span>
+
+                    <div class="form-group mx-sm-3">
+                        <select class="mdb-select md-form colorful-select dropdown-primary" name="Tipo">
+                            <option value="1">Propietario DNI</option>
+                            <option value="2">Propietario Nombre</option>
+                            <option value="3">Cantidad de ambientes</option>
+                            <option value="4">Precio</option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="form-control" name="Criterio" value="" id="TextSearch" placeholder="Criterio de búsqueda ... ">
+                    </div>
+                    <button type="submit" class="btn btn-info">Buscar</button>
+                </form>
+            </div>
+        </div>
+
+        <form asp-action="Create">
+            <div class="row">
+                <div class="col-11 mt-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdInmueble)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InmuebleTipo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Usuario)
+                                </th>
+                                <th>
+                                    Dni
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InmuebleDomicilio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InmuebleAmbientes)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InmuebleUso)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InmueblePrecio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InmuebleEstado)
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdInmueble)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InmuebleTipo.InmuebleTipoNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario.UsuarioNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario.UsuarioDni)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InmuebleDomicilio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InmuebleAmbientes)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InmuebleUso.InmuebleUsoNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InmueblePrecio)
+                                    </td>
+                                    <td>
+                                        @if ((item.InmuebleEstado) == 0)
+                                        {
+                                            <span class="estado-enable"><i class="fas fa-check-circle" title="Disponible"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="estado-disable"><i class="fas fa-times-circle" title="Alquilada"></i></span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="Create" asp-route-id="@item.IdInmueble" class="icon-action"><i class="fas  fa-cart-plus" title="Alquilar"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            @if (ViewBag.Values == 0)
+                            {
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="alert alert-danger">
+                                            No se encontraron resultados para su búsqueda
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
