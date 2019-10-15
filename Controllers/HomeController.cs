@@ -50,6 +50,7 @@ namespace Inmobiliaria.Controllers
                     iterationCount: 1000,
                     numBytesRequested: 256 / 8));
                 var user = usuario.GetByEmail(loginView.Usuario);
+
                 if (user == null || user.UsuarioClave != hashed)
                 {
                     ViewBag.Mensaje = "Datos inválidos";

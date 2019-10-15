@@ -114,26 +114,36 @@ namespace Inmobiliaria.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                Usuario UsuarioEmail = propietarios.GetByEmail(usuario.UsuarioEmail);
+
+                if (ModelState.IsValid && UsuarioEmail == null)
                 {
-                    /*usuario.UsuarioClave = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                    if (usuario.IdUsuarioTipo == 1 || usuario.IdUsuarioTipo == 3) {
+                        usuario.UsuarioClave = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                         password: usuario.UsuarioClave,
                         salt: System.Text.Encoding.ASCII.GetBytes(config["Salt"]),
                         prf: KeyDerivationPrf.HMACSHA1,
                         iterationCount: 1000,
-                        numBytesRequested: 256 / 8));*/
+                        numBytesRequested: 256 / 8));
 
-                    Random rnd = new Random();
-                    String salt = rnd.Next(3654, 55678898) + usuario.UsuarioEmail;
-                    byte[] encryted = System.Text.Encoding.Unicode.GetBytes(salt);
-                    usuario.UsuarioSalt = Convert.ToBase64String(encryted);
-
+                        Random rnd = new Random();
+                        String random = rnd.Next(3654, 55678898) + usuario.UsuarioEmail;
+                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(random);
+                        usuario.UsuarioSalt = Convert.ToBase64String(encryted);
+                    } else { 
+                
+                        Random rnd = new Random();
+                        String random = rnd.Next(3654, 55678898) + usuario.UsuarioEmail;
+                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(random);
+                        usuario.UsuarioSalt = Convert.ToBase64String(encryted);
+                        usuario.UsuarioClave = usuario.UsuarioSalt;
+                    }
                     propietarios.Create(usuario);
                     TempData["Id"] = usuario.IdUsuario;
                     return RedirectToAction(nameof(Index));
                 }
                 else
-
+                ViewBag.Error = "El email ya existe";
                 ViewBag.UsuarioTipo = tipo.GetAll();
                 return View(usuario);
             }

@@ -54,6 +54,9 @@
                                     @Html.DisplayNameFor(model => model.UsuarioTelefono)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.UsuarioEmail)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.Tipo)
                                 </th>
                                 <th>
@@ -65,30 +68,33 @@
 
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdUsuario)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UsuarioNombre)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UsuarioApellido)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UsuarioDni)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UsuarioTelefono)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Tipo.UsuarioTipoRol)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.IdUsuario"  class="icon-action"><i class="fas fa-pencil-alt" title="Editar"></i></a>&nbsp;&nbsp;
-                                        <a asp-action="Delete" asp-route-id="@item.IdUsuario"  class="estado-disable"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioNombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioApellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioDni)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioTelefono)
+                                </td>
+                                <td>
+                                     @Html.DisplayFor(modelItem => item.UsuarioEmail)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tipo.UsuarioTipoRol)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdUsuario" class="icon-action"><i class="fas fa-pencil-alt" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a asp-action="Delete" asp-route-id="@item.IdUsuario" class="estado-disable"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
+                                </td>
+                            </tr>
                             }
                             @if (ViewBag.Values == 0)
                             {

@@ -57,7 +57,7 @@
                                 <div class="col-12 py-3 px-5">
                                     <div class="sidebar-header image-container">
                                         <h1 class="user-icon-size"><i class="fas fa-user-circle"></i></h1>
-                                        <strong>Clara Conte</strong>
+                                        <strong>@User.Claims.Where(x => x.Type == "FullName").FirstOrDefault().Value</strong>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                                 <div class="col-12 py-3 px-5">
                                     <div class="sidebar-header image-container">
                                         <h1 class="user-icon-size"><i class="fas fa-user-circle"></i></h1>
-                                        <strong>Nombre Propietario</strong>
+                                        <strong>@User.Claims.Where(x => x.Type == "FullName").FirstOrDefault().Value</strong>
                                     </div>
                                 </div>
                             </div>
