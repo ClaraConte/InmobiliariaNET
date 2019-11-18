@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+
+// Verificar siempre  // Entity framework
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Inmobiliaria
 {
@@ -34,6 +37,21 @@ namespace Inmobiliaria
                 options.LoginPath = "/Home/Login";
                 options.LogoutPath = "/Home/Logout";
                 options.AccessDeniedPath = "/Home/Restringido";
+            })
+
+            //Autenticación web Api jwt (json web token)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["TokenAuthentication:Issuer"],
+                    ValidAudience = configuration["TokenAuthentication:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(configuration["TokenAuthentication:SecretKey"])),
+                };
             });
 
             //Autorizacion
@@ -46,20 +64,15 @@ namespace Inmobiliaria
             services.AddMvc();
             services.AddTransient<IRepositorio<Usuario>, RepositorioUsuario>();
             services.AddTransient<IRepositorioUsuario, RepositorioUsuario>();
-
             services.AddTransient<IRepositorio<UsuarioTipo>, RepositorioUsuarioTipo>();
-
             services.AddTransient<IRepositorio<Inmueble>, RepositorioInmueble>();
             services.AddTransient<IRepositorioInmueble, RepositorioInmueble>();
-
             services.AddTransient<IRepositorio<InmuebleTipo>, RepositorioInmuebleTipo>();
             services.AddTransient<IRepositorio<InmuebleUso>, RepositorioInmuebleUso>();
-
             services.AddTransient<IRepositorio<Contrato>, RepositorioContrato>();
             services.AddTransient<IRepositorioContrato, RepositorioContrato>();
-
             services.AddTransient<IRepositorio<ContratoGarantia>, RepositorioContratoGarantia>();
-
+            // Entity framework
             services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
         }
 

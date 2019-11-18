@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 
 namespace Inmobiliaria.Controllers
@@ -65,6 +66,10 @@ namespace Inmobiliaria.Controllers
         public ActionResult Edit(int id)
         {
             var u = propietarios.GetAllById(id);
+
+            ViewBag.CategoryId = new SelectList(tipo.GetAll().AsEnumerable(), "IdUsuarioTipo", "UsuarioTipoName", u.IdUsuarioTipo);
+           
+            ViewBag.UsuarioTipo = tipo.GetAll();
             if (TempData.ContainsKey("Mensaje"))
                 ViewBag.Mensaje = TempData["Mensaje"];
             if (TempData.ContainsKey("Error"))

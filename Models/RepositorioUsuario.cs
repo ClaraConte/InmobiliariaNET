@@ -107,7 +107,7 @@ namespace Inmobiliaria.Models
             { busqueda.Campo = "u.UsuarioNombre"; }
             else if (busqueda.Tipo == 3)
             { busqueda.Campo = "u.UsuarioDni"; }
-            else { busqueda.Campo = "u.UsuarioApellido"; }
+            else { busqueda.Campo = "u.UsuarioEmail"; }
 
             IList<Usuario> res = new List<Usuario>();
             using (SqlConnection connection = new SqlConnection(connectionString))
